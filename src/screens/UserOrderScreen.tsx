@@ -7,11 +7,14 @@ import customColors from "../constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../contexts/AuthContext";
 import GMapIcon from '../res/icons/gmap.svg'
+import { useTwilio } from "../contexts/TwilioContext";
 
 
 export default function UserOrderScreen({ navigation }: any) {
-  const { orders, normalUsers, setOrders, getNormalUsers } = useOrder();
-  const {userData} = useAuth();
+  const { orders, normalUsers, setOrders, getNormalUsers, setSelectedOrder } = useOrder();
+  const { userData } = useAuth();
+  const { getToken } = useTwilio();
+
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -44,6 +47,14 @@ export default function UserOrderScreen({ navigation }: any) {
       })
     }
     setLoading(false);
+  }
+
+
+
+  const handleCall = (order: OrderData) => async () => {
+    setSelectedOrder(order);
+    await getToken();
+    navigation.navigate("Call");
   }
 
   return (
@@ -81,8 +92,8 @@ export default function UserOrderScreen({ navigation }: any) {
 
                   <Text style={[t.textLg, t.textBlue500]}>Localitatea: {order.city}</Text>
                   <View style={[t.flex, t.flexRow, t.itemsCenter]}>
-                  <Text style={[t.textBlack, t.mR1]}>Locatie: {order.location}</Text>
-                  <GMapIcon width={30} height={20}/>
+                    <Text style={[t.textBlack, t.mR1]}>Locatie: {order.location}</Text>
+                    <GMapIcon width={30} height={20} />
                   </View>
                   <Text style={[t.textBlack]}>Pret: {order.price}</Text>
                 </View>
@@ -95,8 +106,9 @@ export default function UserOrderScreen({ navigation }: any) {
                     <Text style={[t.textWhite, t.textCenter]}>FINALIZEAZA</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    style={[t.rounded, t.w104, { backgroundColor:customColors.purple_500 }, t.p2,]}
+                    style={[t.rounded, t.w104, { backgroundColor: customColors.purple_500 }, t.p2,]}
                     activeOpacity={order.assignedTo ? 1 : .8}
+                    onPress={handleCall(order)}
                   >
                     <Text style={[t.textWhite, t.textCenter]}>SUNĂ</Text>
                   </TouchableOpacity>

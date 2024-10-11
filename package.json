@@ -12,7 +12,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
-    "@twilio/voice-react-native-sdk": "^1.1.0",
+    "@twilio/voice-react-native-sdk": "^1.2.0",
     "axios": "^1.7.7",
     "react": "18.3.1",
     "react-native": "0.75.3",

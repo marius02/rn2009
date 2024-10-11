@@ -22,6 +22,8 @@ interface OrderContextType {
   setOrders: React.Dispatch<React.SetStateAction<OrderData[]>>,
   normalUsers: User[];
   getNormalUsers: () => Promise<void>;
+  selectedOrder?: OrderData,
+  setSelectedOrder: React.Dispatch<React.SetStateAction<OrderData | undefined>>
 }
 
 const OrderContext = createContext<OrderContextType | undefined>(undefined);
@@ -40,6 +42,7 @@ export function OrderContextProvider({ children }: { children: ReactNode }) {
   const { userData } = useAuth()
   const [orders, setOrders] = useState<OrderData[]>([]);
   const [normalUsers, setNormalUsers] = useState<User[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<OrderData>();
 
   const getNormalUsers = useCallback(async () => {
     if (userData && userData.role === "master") {
@@ -60,7 +63,9 @@ export function OrderContextProvider({ children }: { children: ReactNode }) {
         orders,
         setOrders,
         normalUsers,
-        getNormalUsers
+        getNormalUsers,
+        selectedOrder,
+        setSelectedOrder,
       }
       }>
       {children}

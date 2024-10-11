@@ -36,6 +36,7 @@ import { OrderContextProvider } from './src/contexts/OrderContext';
 import MasterOrderScreen from './src/screens/MasterOrderScreen';
 import UserOrderScreen from './src/screens/UserOrderScreen';
 import { TwilioContextProvider } from './src/contexts/TwilioContext';
+import CallScreen from './src/screens/CallScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -82,6 +83,11 @@ function App(): React.JSX.Element {
                 name="UserOrder"
                 component={UserOrderScreen}
                 options={{ title: "Orders", headerShown: false }}
+              />
+              <Stack.Screen
+                name="Call"
+                component={CallScreen}
+                options={{ title: "Call", headerShown: false }}
               />
             </Stack.Navigator>
           </NavigationContainer>
