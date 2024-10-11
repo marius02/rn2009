@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-interface UserData {
+export interface UserData {
   username: string;
   role: string;
   token?: string;

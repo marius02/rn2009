@@ -32,6 +32,10 @@ import StartScreen from './src/screens/StartScreen';
 import ParcareScreen from './src/screens/ParcareScreen';
 import customColors from './src/constants/colors';
 import { t } from 'react-native-tailwindcss';
+import { OrderContextProvider } from './src/contexts/OrderContext';
+import MasterOrderScreen from './src/screens/MasterOrderScreen';
+import UserOrderScreen from './src/screens/UserOrderScreen';
+import { TwilioContextProvider } from './src/contexts/TwilioContext';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,29 +49,44 @@ function App(): React.JSX.Element {
   return (
     // <SafeAreaView style={backgroundStyle}>
     <AuthContextProvider>
-      <View style={[{backgroundColor: customColors.purple_500}]}>
+      <OrderContextProvider>
+        <TwilioContextProvider>
 
-        <Text style={[t.textWhite, t.p3]}>2009</Text>
-      </View>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ title: "Login", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Start"
-            component={StartScreen}
-            options={{ title: "Start", headerShown: false }}
-          />
-          <Stack.Screen
-            name="Parcare"
-            component={ParcareScreen}
-            options={{ title: "Start Order", headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          <View style={[{ backgroundColor: customColors.purple_500 }]}>
+
+            <Text style={[t.textWhite, t.p3]}>2009</Text>
+          </View>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Login"
+                component={LoginScreen}
+                options={{ title: "Login", headerShown: false }}
+              />
+              <Stack.Screen
+                name="Start"
+                component={StartScreen}
+                options={{ title: "Start", headerShown: false }}
+              />
+              <Stack.Screen
+                name="Parcare"
+                component={ParcareScreen}
+                options={{ title: "Start Order", headerShown: false }}
+              />
+              <Stack.Screen
+                name="MasterOrder"
+                component={MasterOrderScreen}
+                options={{ title: "Orders", headerShown: false }}
+              />
+              <Stack.Screen
+                name="UserOrder"
+                component={UserOrderScreen}
+                options={{ title: "Orders", headerShown: false }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </TwilioContextProvider>
+      </OrderContextProvider>
     </AuthContextProvider>
     // </SafeAreaView>
   );

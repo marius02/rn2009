@@ -11,7 +11,11 @@ export default function StartScreen({ navigation }: any) {
   }
 
   const orderButtonHandler = () => {
-
+    if (userData?.role === "master") {
+      navigation.navigate("MasterOrder");
+    } else {
+      navigation.navigate("UserOrder");
+    }
   }
 
   const parcareButtonHandler = () => {

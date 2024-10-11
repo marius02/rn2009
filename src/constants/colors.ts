@@ -9,6 +9,7 @@ const customColors = {
     // Custom colors
     background_color: '#F5F5F5',
     button_color: '#FF5722',
+    inActive_color: '#d8d8d8',
     text_color: '#FBFBFB',
 };
 
